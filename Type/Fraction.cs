@@ -34,7 +34,8 @@ namespace Type
                 newDenominator = frac1.denominator * frac2.denominator;
             }
             var frac = new Fraction(newNumerator, newDenominator);
-            return frac;
+            //return frac;
+            return frac.Reduction(frac);
         }
         public static Fraction operator -(Fraction frac1, Fraction frac2)
         {
@@ -51,7 +52,8 @@ namespace Type
                 newDenominator = frac1.denominator * frac2.denominator;
             }
             var frac = new Fraction(newNumerator, newDenominator);
-            return frac;
+            //return frac;
+            return frac.Reduction(frac);
         }
         public static Fraction operator *(Fraction frac1, Fraction frac2)
         {
@@ -61,7 +63,8 @@ namespace Type
             newDenominator = frac1.denominator * frac2.denominator;
 
             var frac = new Fraction(newNumerator, newDenominator);
-            return frac;
+            //return frac;
+            return frac.Reduction(frac);
         }
         public static Fraction operator /(Fraction frac1, Fraction frac2)
         {
@@ -71,9 +74,10 @@ namespace Type
             newDenominator = frac1.denominator * frac2.numerator;
 
             var frac = new Fraction(newNumerator, newDenominator);
-            return frac;
+            //return frac;
+            return frac.Reduction(frac);
         }
-        public Fraction Reduction(Fraction frac)
+        private Fraction Reduction(Fraction frac)
         {
             var gcd = GCD(frac.numerator,frac.denominator);
             var newNumerator = frac.numerator / gcd;
