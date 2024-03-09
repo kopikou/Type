@@ -59,6 +59,28 @@ namespace Type.Tests
             fract = fract / new Fraction(4, 5);
             Assert.AreEqual("10 / 12", fract.FractionValue());
         }
+        [TestMethod()]
+        public void ReductionFraction()
+        {
+            var fract = new Fraction(12, 36);
+            var newFract = fract.Reduction(fract);
+            Assert.AreEqual("1 / 3", newFract.FractionValue());
+        }
+        [TestMethod()]
+        public void CompareFraction()
+        {
+            var fract1 = new Fraction(5, 7);
+            var fract2 = new Fraction(1, 2);
+            Assert.AreEqual("5 / 7 > 1 / 2", fract1.Compare(fract1,fract2));
+
+            var fract3 = new Fraction(7, 15);
+            var fract4 = new Fraction(1, 2);
+            Assert.AreEqual("7 / 15 < 1 / 2", fract1.Compare(fract3, fract4));
+
+            var fract5 = new Fraction(1, 2);
+            var fract6 = new Fraction(2, 4);
+            Assert.AreEqual("1 / 2 = 2 / 4", fract1.Compare(fract5, fract6));
+        }
     }
 
 }
