@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Type
 {
@@ -95,37 +96,60 @@ namespace Type
             }
             return numb1;
         }
-        public string Compare(Fraction frac1, Fraction frac2)
+        public string Compare(object frac1, object frac2)
         {
             string message;
             int newNumeratorFrac1;
             int newNumeratorFrac2;
 
-            if (frac1.denominator != frac2.denominator)
-            {
-                newNumeratorFrac1 = frac1.numerator * frac2.denominator;
-                newNumeratorFrac2 = frac2.numerator * frac1.denominator;
-            }
-            else
-            {
-                newNumeratorFrac1 = frac1.numerator;
-                newNumeratorFrac2 = frac2.numerator;
-            }
+            if(frac1.Equals(frac2)) {
+                var frac12 = (Fraction)frac1;
+                var frac22 = (Fraction)frac2;
 
-            if (newNumeratorFrac1 > newNumeratorFrac2)
-            {
-                message = String.Format("{0} > {1}", frac1.FractionValue(), frac2.FractionValue());
-            }
-            else if (newNumeratorFrac1 < newNumeratorFrac2)
-            {
-                message = String.Format("{0} < {1}", frac1.FractionValue(), frac2.FractionValue());
+                if (frac12.denominator != frac22.denominator)
+                {
+                    newNumeratorFrac1 = frac12.numerator * frac22.denominator;
+                    newNumeratorFrac2 = frac22.numerator * frac12.denominator;
+                }
+                else
+                {
+                    newNumeratorFrac1 = frac12.numerator;
+                    newNumeratorFrac2 = frac22.numerator;
+                }
+
+                if (newNumeratorFrac1 > newNumeratorFrac2)
+                {
+                    message = String.Format("{0} > {1}", frac12.FractionValue(), frac22.FractionValue());
+                }
+                else if (newNumeratorFrac1 < newNumeratorFrac2)
+                {
+                    message = String.Format("{0} < {1}", frac12.FractionValue(), frac22.FractionValue());
+                }
+                else
+                {
+                    message = String.Format("{0} = {1}", frac12.FractionValue(), frac22.FractionValue());
+                }
             }
             else
             {
-                message = String.Format("{0} = {1}", frac1.FractionValue(), frac2.FractionValue());
+                message = "Разные типы";
             }
+            
 
             return message;
+        }
+        public override bool Equals(object obj)
+        {
+            int newNumeratorFrac1;
+            int newNumeratorFrac2;
+            if (obj == null || GetType() != obj.GetType() || obj.GetType() != typeof(Fraction))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 
